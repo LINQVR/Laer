@@ -1,23 +1,38 @@
 <!doctype HTML>
 <html>
-<script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
-  <body style='margin : 0px; overflow: hidden;'>
-    <a-scene stats embedded arjs='trackingMethod: best; debugUIEnabled: false'>
+<!--<script>
+AFRAME.registerComponent('soundhandler', {
+    tick: function () {
+           var entity = document.querySelector('[sound]');
+         if (document.querySelector('a-marker').object3D.visible == true) {
+            entity.components.sound.playSound();
+        } else {
+            entity.components.sound.pauseSound();
+        }
+
+     }
+});
+</script> -->
+  
+  <body style="margin : 0px; overflow: hidden;">
+    <a-scene stats embedded arjs="trackingMethod: best; debugUIEnabled: false">
     <a-assets>
-      <a-asset-item id="smiley" src="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/9176d098/1.0/SmilingFace/glTF/SmilingFace.gltf"></a-asset-item>
+      <a-asset-item id="cellist" src="https://cdn.glitch.com/d1eec00e-eb1d-407b-a4df-4d63492541cf%2FCellist.gltf?1556135336394"></a-asset-item>
+      <audio id="sound" src="https://cdn.glitch.com/d1eec00e-eb1d-407b-a4df-4d63492541cf%2FDorrance%20Dance%20-%20ETM%20Double%20Down.mp3?1557344402105" preload="auto" autoplay="true" loop></audio>
+      
     </a-assets>
   	<a-marker preset="hiro">
-      <a-entity gltf-model="#smiley" rotation= "180 0 0">
-        <a-animation attribute="position"
-          dur="5000"
-          direction="alternate"
-          from="0 1 0"
-          to="0 5 0"
-          repeat="indefinite"></a-animation>
+      <!--a-marker type='pattern' patternUrl='https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/Monster/glTF/Monster.gltf' -->
+      <a-entity light="type:directional; castShadow:true;" position="1 1 1">
+      </a-entity>
+      <a-entity gltf-model="#cellist" rotation= "0 0 0" scale=".1 .1 .1" position=".0 0 .2" 
+                animation-mixer="loop: repeat">
       </a-entity>
   	</a-marker>
+      <!--<a-entity sound="src: #sound" autoplay="true"></a-entity>-->
   	<a-entity camera></a-entity>
     </a-scene>
   </body>
